@@ -1,4 +1,3 @@
-# wireguard_unbound_doh_adblock
 # VPN over wireguard with DNS over HTTPS and adblock
 
 ## In under 5 minutes* with just a few klicks
