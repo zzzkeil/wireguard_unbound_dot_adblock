@@ -280,15 +280,15 @@ curl -o /root/utils/generate-domains-blacklists/domains-time-restricted.txt http
 curl -o /root/utils/generate-domains-blacklists/domains-whitelist.txt https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
 curl -o /root/utils/generate-domains-blacklists/generate-domains-blacklist.py https://raw.githubusercontent.com/jedisct1/dnscrypt-proxy/master/utils/generate-domains-blacklists/generate-domains-blacklist.py
 chmod +x /root/utils/generate-domains-blacklists/generate-domains-blacklist.py
-cd /root/utils/generate-domains-blacklists/generate-domains-blacklists/
-./generate-domains-blacklist.py > /etc/dnscrypt-proxy/blacklist.txt
+cd /root/utils/generate-domains-blacklists/
+./generate-domains-blacklist.py > /root/utils/adblocklist
 cd
 ## check if generate blacklist failed - file is empty
-curl -o /etc/dnscrypt-proxy/checkblacklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/configs/checkblacklist.sh
-chmod +x /etc/dnscrypt-proxy/checkblacklist.sh
+curl -o /root/utils/generate-domains-blacklists/checkblacklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/configs/checkblacklist.sh
+chmod +x /root/utils/generate-domains-blacklists/checkblacklist.sh
 #
 ### create crontabs
-(crontab -l ; echo "50 23 * * 4 cd /root/utils/generate-domains-blacklists/ &&  ./generate-domains-blacklist.py > /root/utils/generate-domains-blacklists/blacklist.txt") | sort - | uniq - | crontab -
+(crontab -l ; echo "50 23 * * 4 cd /root/utils/generate-domains-blacklists/ &&  ./generate-domains-blacklist.py > /root/utils/adblocklist") | sort - | uniq - | crontab -
 (crontab -l ; echo "40 23 * * 4 curl -o /root/utils/generate-domains-blacklists/domains-whitelist.txt https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt") | sort - | uniq - | crontab -
 (crontab -l ; echo "30 23 * * 4 curl -o /root/utils/generate-domains-blacklists/domains-blacklist.conf https://raw.githubusercontent.com/zzzkeil/Wireguard-DNScrypt-VPN-Server/master/blocklist/domains-blacklist-default.conf") | sort - | uniq - | crontab -
 (crontab -l ; echo "15 * * * 5 cd /root/utils/generate-domains-blacklists/ &&  ./root/utils/generate-domains-blacklists/checkblacklist.sh") | sort - | uniq - | crontab -
