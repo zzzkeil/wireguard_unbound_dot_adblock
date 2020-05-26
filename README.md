@@ -1,4 +1,4 @@
-# NOT ready to run jet    :)  be aware    
+# - be aware - scripts not finished now !    
 #
 # VPN over wireguard with DNS over HTTPS and adblock
 
