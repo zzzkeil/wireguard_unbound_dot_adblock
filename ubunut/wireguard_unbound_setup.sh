@@ -275,6 +275,12 @@ chown -R unbound:unbound /var/lib/unbound
 ### setup Blacklist and a Whitelist from (anudeepND)"
 mkdir /root/utils/
 mkdir /root/utils/generate-domains-blacklists/
+#test neu
+curl -sS -L --compressed "http://pgl.yoyo.org/adservers/serverlist.php?hostformat=unbound&showintro=0&mimetype=plaintext" > /root/utils/pgl.yoyo.org.conf
+
+
+
+#alt 
 #curl -o /root/utils/generate-domains-blacklists/domains-blacklist.conf https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/blocklist/domains-blacklist-default.conf
 #curl -o /root/utils/generate-domains-blacklists/domains-blacklist-local-additions.txt https://raw.githubusercontent.com/jedisct1/dnscrypt-proxy/master/utils/generate-domains-blacklists/domains-blacklist-local-additions.txt
 #curl -o /root/utils/generate-domains-blacklists/domains-time-restricted.txt https://raw.githubusercontent.com/jedisct1/dnscrypt-proxy/master/utils/generate-domains-blacklists/domains-time-restricted.txt
