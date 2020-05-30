@@ -16,7 +16,7 @@
 ##### if the base is not installed, the script below will download this one for you.
 ----------------------------------------
 
-###### For Ubuntu 18.04 ( 20.04 in testing ) :
+###### For Ubuntu 18.04 ( 20.04 in testing ) - ( Debian 10 in testing ) :
 ```
 wget -O  wireguard_unbound_setup.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/ubunut/wireguard_unbound_setup.sh
 
