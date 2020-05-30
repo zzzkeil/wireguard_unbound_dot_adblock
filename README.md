@@ -1,11 +1,11 @@
 # - be aware - scripts not finished now !    
 #
-# VPN over wireguard with DNS over HTTPS and adblock
+# VPN over wireguard with DNS over TLS and adblock
 
 ## In under 5 minutes* with just a few klicks
 ### Setup Wireguard VPN Server,
 #### incl. ipv4 and ipv6
-#### incl. unbound
+#### incl. unbound forward TLS
 #### incl. Ad-, Maleware-, ..., Blocking
 #### incl. 5 ready client config files  ( one with QR-Code in terminal )
 ##### add_client.sh / remove_client.sh under development in tools
