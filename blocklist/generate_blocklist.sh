@@ -1,6 +1,6 @@
 #!/bin/bash
 #test01
-mv /root/adblocklists/unboundadblock.list /root/adblocklists/unboundadblock.list.bak
+mv /etc/unbound/unboundadblock.conf /etc/unbound/unboundadblock.conf.bak
 
 
 wget -O  /root/adblocklists/StevenBlack.txt https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
@@ -17,5 +17,5 @@ cat /root/adblocklists/anudeepNDads.txt | grep '^0\.0\.0\.0' | awk '{print "loca
 cat /root/adblocklists/anudeepNDcoin.txt | grep '^0\.0\.0\.0' | awk '{print "local-zone: \""$2"\" redirect\nlocal-data: \""$2" A 0.0.0.0\""}' >> /root/adblocklists/unboundadblock_temp.list
 cat /root/adblocklists/anudeepNDfacebook.txt | grep '^0\.0\.0\.0' | awk '{print "local-zone: \""$2"\" redirect\nlocal-data: \""$2" A 0.0.0.0\""}' >> /root/adblocklists/unboundadblock_temp.list
 
-awk '!visited[$0]++' /root/adblocklists/unboundadblock_temp.list > /root/adblocklists/unboundadblock.list
+awk '!visited[$0]++' /root/adblocklists/unboundadblock_temp.list > /etc/unbound/unboundadblock.conf
 rm /root/adblocklists/unboundadblock_temp.list
