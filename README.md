@@ -1,4 +1,5 @@
-# - be aware - scripts not finished now !    
+# - be aware - scripts on testing for now.
+## - DoT resolver is cloudfare for testing !
 #
 # VPN over wireguard with DNS over TLS and adblock
 
