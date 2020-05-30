@@ -272,33 +272,22 @@ curl -o /etc/unbound/unbound.conf https://raw.githubusercontent.com/zzzkeil/wire
 chown -R unbound:unbound /var/lib/unbound
 ######################################
 # todo !
-### setup Blacklist and a Whitelist from (anudeepND)"
+### setup Blacklist"
 mkdir /root/adblocklists/
-#test neu
-curl -sS -L --compressed "http://pgl.yoyo.org/adservers/serverlist.php?hostformat=unbound&showintro=0&mimetype=plaintext" > /root/utils/pgl.yoyo.org.conf
-
-
-
-#alt 
-#curl -o /root/utils/generate-domains-blacklists/domains-blacklist.conf https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/blocklist/domains-blacklist-default.conf
-#curl -o /root/utils/generate-domains-blacklists/domains-blacklist-local-additions.txt https://raw.githubusercontent.com/jedisct1/dnscrypt-proxy/master/utils/generate-domains-blacklists/domains-blacklist-local-additions.txt
-#curl -o /root/utils/generate-domains-blacklists/domains-time-restricted.txt https://raw.githubusercontent.com/jedisct1/dnscrypt-proxy/master/utils/generate-domains-blacklists/domains-time-restricted.txt
-#curl -o /root/utils/generate-domains-blacklists/domains-whitelist.txt https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
-#curl -o /root/utils/generate-domains-blacklists/generate-domains-blacklist.py https://raw.githubusercontent.com/jedisct1/dnscrypt-proxy/master/utils/generate-domains-blacklists/generate-domains-blacklist.py
-#chmod +x /root/utils/generate-domains-blacklists/generate-domains-blacklist.py
-#cd /root/utils/generate-domains-blacklists/
-#./generate-domains-blacklist.py > /root/utils/adblocklist
+curl -o /root/adblocklists/generate_blocklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/blocklist/generate_blocklist.sh
+chmod +x /root/adblocklists/generate_blocklist.sh
+cd /root/adblocklists/
+./generate_blocklist.sh
 cd
+###Whitelist coming soon :)
+##
 ## check if generate blacklist failed - file is empty
-#curl -o /root/utils/generate-domains-blacklists/checkblacklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/configs/checkblacklist.sh
-#chmod +x /root/utils/generate-domains-blacklists/checkblacklist.sh
-#
+#maybelater
+##
 ### create crontabs
-#(crontab -l ; echo "50 23 * * 4 cd /root/utils/generate-domains-blacklists/ &&  ./generate-domains-blacklist.py > /root/utils/adblocklist") | sort - | uniq - | crontab -
-#(crontab -l ; echo "40 23 * * 4 curl -o /root/utils/generate-domains-blacklists/domains-whitelist.txt https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt") | sort - | uniq - | crontab -
-#(crontab -l ; echo "30 23 * * 4 curl -o /root/utils/generate-domains-blacklists/domains-blacklist.conf https://raw.githubusercontent.com/zzzkeil/Wireguard-DNScrypt-VPN-Server/master/blocklist/domains-blacklist-default.conf") | sort - | uniq - | crontab -
-#(crontab -l ; echo "15 * * * 5 cd /root/utils/generate-domains-blacklists/ &&  ./root/utils/generate-domains-blacklists/checkblacklist.sh") | sort - | uniq - | crontab -
-#(crontab -l ; echo "59 23 * * 4,5 /bin/systemctl restart unbound.service") | sort - | uniq - | crontab -
+(crontab -l ; echo "30 23 * * 4 cd /root/adblocklists/ &&  ./generate_blocklist.sh") | sort - | uniq - | crontab -
+(crontab -l ; echo "01 23 * * 4 curl -o /root/adblocklists/generate_blocklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/blocklist/generate_blocklist.sh") | sort - | uniq - | crontab -
+(crontab -l ; echo "59 23 * * 4 /bin/systemctl restart unbound.service") | sort - | uniq - | crontab -
 #
 ### setup systemctl
 systemctl stop systemd-resolved
