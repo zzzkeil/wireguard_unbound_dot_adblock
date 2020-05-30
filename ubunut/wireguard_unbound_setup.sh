@@ -1,11 +1,11 @@
 #!/bin/bash
 clear
 echo " ##############################################################################"
-echo " #  NOT ready to run jet    :)  be aware                                      #"
+echo " #  maybew ready to run jet,,, but  be aware                                  #"
 echo " #  just a modify copy of the Wireguard-DNScrypt-VPN-Server repos.            #"
 echo " ##############################################################################"
 echo " ##############################################################################"
-echo " # Version 2020.05.26                                                         #"
+echo " # Version 2020.05.30  RC 1  :)                                               #"
 echo " ##############################################################################"
 echo ""
 echo ""
@@ -270,7 +270,7 @@ chmod 600 /etc/wireguard/client5.conf
 curl -o /var/lib/unbound/root.hints https://www.internic.net/domain/named.cache
 curl -o /etc/unbound/unbound.conf https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/configs/unbound.conf
 chown -R unbound:unbound /var/lib/unbound
-######################################
+
 # todo !
 ### setup Blacklist"
 mkdir /root/adblocklists/
@@ -281,13 +281,10 @@ cd /root/adblocklists/
 cd
 ###Whitelist coming soon :)
 ##
-## check if generate blacklist failed - file is empty
-#maybelater
-##
 ### create crontabs
 (crontab -l ; echo "30 23 * * 4 cd /root/adblocklists/ &&  ./generate_blocklist.sh") | sort - | uniq - | crontab -
 (crontab -l ; echo "01 23 * * 4 curl -o /root/adblocklists/generate_blocklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/blocklist/generate_blocklist.sh") | sort - | uniq - | crontab -
-(crontab -l ; echo "59 23 * * 4 /bin/systemctl restart unbound.service") | sort - | uniq - | crontab -
+(crontab -l ; echo "59 23 * * * /bin/systemctl restart unbound.service") | sort - | uniq - | crontab -
 #
 ### setup systemctl
 systemctl stop systemd-resolved
