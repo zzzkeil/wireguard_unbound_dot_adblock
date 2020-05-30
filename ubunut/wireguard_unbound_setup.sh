@@ -273,8 +273,7 @@ chown -R unbound:unbound /var/lib/unbound
 ######################################
 # todo !
 ### setup Blacklist and a Whitelist from (anudeepND)"
-mkdir /root/utils/
-mkdir /root/utils/generate-domains-blacklists/
+mkdir /root/adblocklists/
 #test neu
 curl -sS -L --compressed "http://pgl.yoyo.org/adservers/serverlist.php?hostformat=unbound&showintro=0&mimetype=plaintext" > /root/utils/pgl.yoyo.org.conf
 
