@@ -65,7 +65,7 @@ if [[ -e /root/wireguard_unbound_setup.README ]]; then
 	 echo "/root/wireguard_unbound_setup.README"
 	 echo ""
 	 echo "For - News / Updates / Issues - check my github site"
-	 echo "https://github.com/zzzkeil/wireguard_unbound_doh_adblock"
+	 echo "https://github.com/zzzkeil/wireguard_unbound_dot_adblock"
 	 echo
 	 echo
 	 exit 1
@@ -268,13 +268,13 @@ chmod 600 /etc/wireguard/client5.conf
 #
 ### setup unbound
 curl -o /var/lib/unbound/root.hints https://www.internic.net/domain/named.cache
-curl -o /etc/unbound/unbound.conf https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/configs/unbound.conf
+curl -o /etc/unbound/unbound.conf https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_dot_adblock/master/configs/unbound.conf
 chown -R unbound:unbound /var/lib/unbound
 
 # todo !
 ### setup Blacklist"
 mkdir /root/adblocklists/
-curl -o /root/adblocklists/generate_blocklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/blocklist/generate_blocklist.sh
+curl -o /root/adblocklists/generate_blocklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_dot_adblock/master/blocklist/generate_blocklist.sh
 chmod +x /root/adblocklists/generate_blocklist.sh
 cd /root/adblocklists/
 ./generate_blocklist.sh
@@ -283,7 +283,7 @@ cd
 ##
 ### create crontabs
 (crontab -l ; echo "30 23 * * 4 cd /root/adblocklists/ &&  ./generate_blocklist.sh") | sort - | uniq - | crontab -
-(crontab -l ; echo "01 23 * * 4 curl -o /root/adblocklists/generate_blocklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/blocklist/generate_blocklist.sh") | sort - | uniq - | crontab -
+(crontab -l ; echo "01 23 * * 4 curl -o /root/adblocklists/generate_blocklist.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_dot_adblock/master/blocklist/generate_blocklist.sh") | sort - | uniq - | crontab -
 (crontab -l ; echo "59 23 * * * /bin/systemctl restart unbound.service") | sort - | uniq - | crontab -
 #
 ### setup systemctl
@@ -296,7 +296,7 @@ systemctl enable wg-quick@wg0.service
 systemctl start wg-quick@wg0.service
 cp /etc/systemd/system/multi-user.target.wants/unbound.service /root/script_backupfiles/unbound.service.orig
 systemctl disable unbound
-curl -o /lib/systemd/system/unbound.service https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/configs/unbound.service
+curl -o /lib/systemd/system/unbound.service https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_dot_adblock/master/configs/unbound.service
 systemctl enable unbound
 systemctl restart unbound
 #
@@ -305,10 +305,10 @@ echo "
 +++ do not delete this file +++
 Instructions coming soon 
 For - News / Updates / Issues - check my github site
-https://github.com/zzzkeil/wireguard_unbound_doh_adblock
+https://github.com/zzzkeil/wireguard_unbound_dot_adblock
 " > /root/wireguard_unbound_doh_adblock.README
-curl -o add_client.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/tools/add_client.sh
-curl -o remove_client.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_doh_adblock/master/tools/remove_client.sh
+curl -o add_client.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_dot_adblock/master/tools/add_client.sh
+curl -o remove_client.sh https://raw.githubusercontent.com/zzzkeil/wireguard_unbound_dot_adblock/master/tools/remove_client.sh
 #
 ### finish
 clear
